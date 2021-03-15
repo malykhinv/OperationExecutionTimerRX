@@ -1,0 +1,891 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.fragments.CollectionsFragment">
+
+    <TableRow
+        android:id="@+id/rowTitles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:background="@drawable/row_title_background"
+        android:paddingStart="@dimen/row_side_padding"
+        android:paddingEnd="@dimen/row_side_padding"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/row_height_large"
+            android:layout_weight="2"
+            android:fontFamily="sans-serif"
+            android:gravity="start|center_vertical"
+            android:text="@string/column_title_operation"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_small" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/row_height_large"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="@string/column_title_arraylist"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_small" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/row_height_large"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="@string/column_title_linkledlist"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_small" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/row_height_large"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="@string/column_title_copyonwritearraylist"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_small" />
+    </TableRow>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:background="@drawable/table_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rowTitles">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/row_margin_top"
+                android:padding="@dimen/row_padding"
+                android:paddingStart="@dimen/row_side_padding"
+                android:paddingEnd="@dimen/row_side_padding">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/row_title_adding_in_the_beginning"
+                    android:textColor="@color/grey_500"
+                    android:textSize="@dimen/text_small" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:paddingStart="@dimen/row_padding"
+                    android:paddingEnd="@dimen/row_padding">
+
+                    <TextView
+                        android:id="@+id/textAddingInTheBeginningArrayListTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/default_cell_text"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/grey_500"
+                        android:textSize="@dimen/text_small" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBarAddingInTheBeginningArrayList"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/progressbar_height"
+                        android:indeterminate="true"
+                        android:indeterminateDuration="1000"
+                        android:progress="100"
+                        android:progressDrawable="@drawable/progressbar_drawable"
+                        android:progressTint="@color/lime_200"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:paddingStart="@dimen/row_padding"
+                    android:paddingEnd="@dimen/row_padding">
+
+                    <TextView
+                        android:id="@+id/textAddingInTheBeginningLinkedListTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/default_cell_text"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/grey_500"
+                        android:textSize="@dimen/text_small" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBarAddingInTheBeginningLinkedList"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/progressbar_height"
+                        android:indeterminate="true"
+                        android:indeterminateDuration="1000"
+                        android:progress="100"
+                        android:progressDrawable="@drawable/progressbar_drawable"
+                        android:progressTint="@color/lime_200"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:paddingStart="@dimen/row_padding"
+                    android:paddingEnd="@dimen/row_padding">
+
+                    <TextView
+                        android:id="@+id/textAddingInTheBeginningCopyOnWriteArrayListTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/default_cell_text"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/grey_500"
+                        android:textSize="@dimen/text_small" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBarAddingInTheBeginningCopyOnWriteArrayList"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/progressbar_height"
+                        android:indeterminate="true"
+                        android:indeterminateDuration="1000"
+                        android:progress="100"
+                        android:progressDrawable="@drawable/progressbar_drawable"
+                        android:progressTint="@color/lime_200"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/row_margin_top"
+                android:padding="@dimen/row_padding"
+                android:paddingStart="@dimen/row_side_padding"
+                android:paddingEnd="@dimen/row_side_padding">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/row_title_adding_in_the_middle"
+                    android:textColor="@color/grey_500"
+                    android:textSize="@dimen/text_small" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:paddingStart="@dimen/row_padding"
+                    android:paddingEnd="@dimen/row_padding">
+
+                    <TextView
+                        android:id="@+id/textAddingInTheMiddleArrayListTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/default_cell_text"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/grey_500"
+                        android:textSize="@dimen/text_small" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBarAddingInTheMiddleArrayList"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/progressbar_height"
+                        android:indeterminate="true"
+                        android:indeterminateDuration="1000"
+                        android:progress="100"
+                        android:progressDrawable="@drawable/progressbar_drawable"
+                        android:progressTint="@color/lime_200"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:paddingStart="@dimen/row_padding"
+                    android:paddingEnd="@dimen/row_padding">
+
+                    <TextView
+                        android:id="@+id/textAddingInTheMiddleLinkedListTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/default_cell_text"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/grey_500"
+                        android:textSize="@dimen/text_small" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBarAddingInTheMiddleLinkedList"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/progressbar_height"
+                        android:indeterminate="true"
+                        android:indeterminateDuration="1000"
+                        android:progress="100"
+                        android:progressDrawable="@drawable/progressbar_drawable"
+                        android:progressTint="@color/lime_200"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:paddingStart="@dimen/row_padding"
+                    android:paddingEnd="@dimen/row_padding">
+
+                    <TextView
+                        android:id="@+id/textAddingInTheMiddleCopyOnWriteArrayListTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/default_cell_text"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/grey_500"
+                        android:textSize="@dimen/text_small" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBarAddingInTheMiddleCopyOnWriteArrayList"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/progressbar_height"
+                        android:indeterminate="true"
+                        android:indeterminateDuration="1000"
+                        android:progress="100"
+                        android:progressDrawable="@drawable/progressbar_drawable"
+                        android:progressTint="@color/lime_200"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/row_margin_top"
+                android:padding="@dimen/row_padding"
+                android:paddingStart="@dimen/row_side_padding"
+                android:paddingEnd="@dimen/row_side_padding">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/row_title_adding_in_the_end"
+                    android:textColor="@color/grey_500"
+                    android:textSize="@dimen/text_small" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:paddingStart="@dimen/row_padding"
+                    android:paddingEnd="@dimen/row_padding">
+
+                    <TextView
+                        android:id="@+id/textAddingInTheEndArrayListTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/default_cell_text"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/grey_500"
+                        android:textSize="@dimen/text_small" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBarAddingInTheEndArrayList"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/progressbar_height"
+                        android:indeterminate="true"
+                        android:indeterminateDuration="1000"
+                        android:progress="100"
+                        android:progressDrawable="@drawable/progressbar_drawable"
+                        android:progressTint="@color/lime_200"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:paddingStart="@dimen/row_padding"
+                    android:paddingEnd="@dimen/row_padding">
+
+                    <TextView
+                        android:id="@+id/textAddingInTheEndLinkedListTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/default_cell_text"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/grey_500"
+                        android:textSize="@dimen/text_small" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBarAddingInTheEndLinkedList"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/progressbar_height"
+                        android:indeterminate="true"
+                        android:indeterminateDuration="1000"
+                        android:progress="100"
+                        android:progressDrawable="@drawable/progressbar_drawable"
+                        android:progressTint="@color/lime_200"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:paddingStart="@dimen/row_padding"
+                    android:paddingEnd="@dimen/row_padding">
+
+                    <TextView
+                        android:id="@+id/textAddingInTheEndCopyOnWriteArrayListTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/default_cell_text"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/grey_500"
+                        android:textSize="@dimen/text_small" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBarAddingInTheEndCopyOnWriteArrayList"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/progressbar_height"
+                        android:indeterminate="true"
+                        android:indeterminateDuration="1000"
+                        android:progress="100"
+                        android:progressDrawable="@drawable/progressbar_drawable"
+                        android:progressTint="@color/lime_200"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/row_margin_top"
+                android:padding="@dimen/row_padding"
+                android:paddingStart="@dimen/row_side_padding"
+                android:paddingEnd="@dimen/row_side_padding">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/row_title_search_by_value"
+                    android:textColor="@color/grey_500"
+                    android:textSize="@dimen/text_small" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:paddingStart="@dimen/row_padding"
+                    android:paddingEnd="@dimen/row_padding">
+
+                    <TextView
+                        android:id="@+id/textSearchByValueArrayListTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/default_cell_text"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/grey_500"
+                        android:textSize="@dimen/text_small" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBarSearchByValueArrayList"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/progressbar_height"
+                        android:indeterminate="true"
+                        android:indeterminateDuration="1000"
+                        android:progress="100"
+                        android:progressDrawable="@drawable/progressbar_drawable"
+                        android:progressTint="@color/lime_200"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:paddingStart="@dimen/row_padding"
+                    android:paddingEnd="@dimen/row_padding">
+
+                    <TextView
+                        android:id="@+id/textSearchByValueLinkedListTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/default_cell_text"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/grey_500"
+                        android:textSize="@dimen/text_small" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBarSearchByValueLinkedList"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/progressbar_height"
+                        android:indeterminate="true"
+                        android:indeterminateDuration="1000"
+                        android:progress="100"
+                        android:progressDrawable="@drawable/progressbar_drawable"
+                        android:progressTint="@color/lime_200"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:paddingStart="@dimen/row_padding"
+                    android:paddingEnd="@dimen/row_padding">
+
+                    <TextView
+                        android:id="@+id/textSearchByValueCopyOnWriteArrayListTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/default_cell_text"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/grey_500"
+                        android:textSize="@dimen/text_small" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBarSearchByValueCopyOnWriteArrayList"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/progressbar_height"
+                        android:indeterminate="true"
+                        android:indeterminateDuration="1000"
+                        android:progress="100"
+                        android:progressDrawable="@drawable/progressbar_drawable"
+                        android:progressTint="@color/lime_200"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/row_margin_top"
+                android:padding="@dimen/row_padding"
+                android:paddingStart="@dimen/row_side_padding"
+                android:paddingEnd="@dimen/row_side_padding">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/row_title_removing_in_the_beginning"
+                    android:textColor="@color/grey_500"
+                    android:textSize="@dimen/text_small" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:paddingStart="@dimen/row_padding"
+                    android:paddingEnd="@dimen/row_padding">
+
+                    <TextView
+                        android:id="@+id/textRemoveInTheBeginningArrayListTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/default_cell_text"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/grey_500"
+                        android:textSize="@dimen/text_small" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBarRemoveInTheBeginningArrayList"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/progressbar_height"
+                        android:indeterminate="true"
+                        android:indeterminateDuration="1000"
+                        android:progress="100"
+                        android:progressDrawable="@drawable/progressbar_drawable"
+                        android:progressTint="@color/lime_200"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:paddingStart="@dimen/row_padding"
+                    android:paddingEnd="@dimen/row_padding">
+
+                    <TextView
+                        android:id="@+id/textRemoveInTheBeginningLinkedListTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/default_cell_text"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/grey_500"
+                        android:textSize="@dimen/text_small" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBarRemoveInTheBeginningLinkedList"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/progressbar_height"
+                        android:indeterminate="true"
+                        android:indeterminateDuration="1000"
+                        android:progress="100"
+                        android:progressDrawable="@drawable/progressbar_drawable"
+                        android:progressTint="@color/lime_200"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:paddingStart="@dimen/row_padding"
+                    android:paddingEnd="@dimen/row_padding">
+
+                    <TextView
+                        android:id="@+id/textRemoveInTheBeginningCopyOnWriteArrayListTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/default_cell_text"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/grey_500"
+                        android:textSize="@dimen/text_small" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBarRemoveInTheBeginningCopyOnWriteArrayList"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/progressbar_height"
+                        android:indeterminate="true"
+                        android:indeterminateDuration="1000"
+                        android:progress="100"
+                        android:progressDrawable="@drawable/progressbar_drawable"
+                        android:progressTint="@color/lime_200"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/row_margin_top"
+                android:padding="@dimen/row_padding"
+                android:paddingStart="@dimen/row_side_padding"
+                android:paddingEnd="@dimen/row_side_padding">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/row_title_removing_in_the_middle"
+                    android:textColor="@color/grey_500"
+                    android:textSize="@dimen/text_small" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:paddingStart="@dimen/row_padding"
+                    android:paddingEnd="@dimen/row_padding">
+
+                    <TextView
+                        android:id="@+id/textRemoveInTheMiddleArrayListTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/default_cell_text"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/grey_500"
+                        android:textSize="@dimen/text_small" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBarRemoveInTheMiddleArrayList"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/progressbar_height"
+                        android:indeterminate="true"
+                        android:indeterminateDuration="1000"
+                        android:progress="100"
+                        android:progressDrawable="@drawable/progressbar_drawable"
+                        android:progressTint="@color/lime_200"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:paddingStart="@dimen/row_padding"
+                    android:paddingEnd="@dimen/row_padding">
+
+                    <TextView
+                        android:id="@+id/textRemoveInTheMiddleLinkedListTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/default_cell_text"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/grey_500"
+                        android:textSize="@dimen/text_small" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBarRemoveInTheMiddleLinkedList"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/progressbar_height"
+                        android:indeterminate="true"
+                        android:indeterminateDuration="1000"
+                        android:progress="100"
+                        android:progressDrawable="@drawable/progressbar_drawable"
+                        android:progressTint="@color/lime_200"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:paddingStart="@dimen/row_padding"
+                    android:paddingEnd="@dimen/row_padding">
+
+                    <TextView
+                        android:id="@+id/textRemoveInTheMiddleCopyOnWriteArrayListTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/default_cell_text"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/grey_500"
+                        android:textSize="@dimen/text_small" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBarRemoveInTheMiddleCopyOnWriteArrayList"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/progressbar_height"
+                        android:indeterminate="true"
+                        android:indeterminateDuration="1000"
+                        android:progress="100"
+                        android:progressDrawable="@drawable/progressbar_drawable"
+                        android:progressTint="@color/lime_200"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/row_margin_top"
+                android:layout_marginBottom="@dimen/row_margin_bottom"
+                android:padding="@dimen/row_padding"
+                android:paddingStart="@dimen/row_side_padding"
+                android:paddingEnd="@dimen/row_side_padding">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/row_title_removing_in_the_end"
+                    android:textColor="@color/grey_500"
+                    android:textSize="@dimen/text_small" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:paddingStart="@dimen/row_padding"
+                    android:paddingEnd="@dimen/row_padding">
+
+                    <TextView
+                        android:id="@+id/textRemoveInTheEndArrayListTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/default_cell_text"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/grey_500"
+                        android:textSize="@dimen/text_small" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBarRemoveInTheEndArrayList"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/progressbar_height"
+                        android:indeterminate="true"
+                        android:indeterminateDuration="1000"
+                        android:progress="100"
+                        android:progressDrawable="@drawable/progressbar_drawable"
+                        android:progressTint="@color/lime_200"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:paddingStart="@dimen/row_padding"
+                    android:paddingEnd="@dimen/row_padding"
+                    tools:ignore="TooManyViews">
+
+                    <TextView
+                        android:id="@+id/textRemoveInTheEndLinkedListTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/default_cell_text"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/grey_500"
+                        android:textSize="@dimen/text_small"
+                        tools:ignore="TooManyViews" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBarRemoveInTheEndLinkedList"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/progressbar_height"
+                        android:indeterminate="true"
+                        android:indeterminateDuration="1000"
+                        android:progress="100"
+                        android:progressDrawable="@drawable/progressbar_drawable"
+                        android:progressTint="@color/lime_200"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:paddingStart="@dimen/row_padding"
+                    android:paddingEnd="@dimen/row_padding">
+
+                    <TextView
+                        android:id="@+id/textRemoveInTheEndCopyOnWriteArrayListTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/default_cell_text"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/grey_500"
+                        android:textSize="@dimen/text_small" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBarRemoveInTheEndCopyOnWriteArrayList"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/progressbar_height"
+                        android:indeterminate="true"
+                        android:progress="100"
+                        android:progressDrawable="@drawable/progressbar_drawable"
+                        android:progressTint="@color/lime_200"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+            </TableRow>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">OperationsExecutionTimer</string>
+    <string name="tab_title_collections">Collections</string>
+    <string name="tab_title_maps">Maps</string>
+    <string name="column_title_operation">Operation</string>
+    <string name="column_title_arraylist">ArrayList</string>
+    <string name="column_title_linkledlist">LinkedList</string>
+    <string name="column_title_copyonwritearraylist">CopyOnWrite\nArrayList</string>
+    <string name="column_title_treemap">TreeMap</string>
+    <string name="column_title_hashmap">HashMap</string>
+    <string name="row_title_adding_in_the_beginning">Adding in the beginning</string>
+    <string name="row_title_adding_in_the_middle">Adding in the middle</string>
+    <string name="row_title_adding_in_the_end">Adding in the end</string>
+    <string name="row_title_search_by_value">Search by value</string>
+    <string name="row_title_removing_in_the_beginning">Delete in the beginning</string>
+    <string name="row_title_removing_in_the_middle">Delete in the middle</string>
+    <string name="row_title_removing_in_the_end">Delete in the end</string>
+    <string name="row_title_adding_new">Adding new</string>
+    <string name="row_title_search_by_key">Search by key</string>
+    <string name="row_title_removing">Removing</string>
+    <string name="fab_description">Button to start the calculation</string>
+    <string name="text_input_title">Number of elements in collections and maps:</string>
+    <string name="error_wrong_size">Incorrect size</string>
+    <string name="default_cell_text">N/A</string>
+    <string name="postfix_time_unit">" ms"</string>
+</resources>
