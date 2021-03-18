@@ -11,10 +11,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
+import com.malykhinv.operationsexecutiontimerrx.FragmentContract;
+import com.malykhinv.operationsexecutiontimerrx.MainContract;
 import com.malykhinv.operationsexecutiontimerrx.databinding.FragmentMapsBinding;
 import org.jetbrains.annotations.NotNull;
 
-public class MapsFragment extends Fragment {
+public class MapsFragment extends Fragment implements FragmentContract.View {
 
     public final int NUMBER_OF_OPERATIONS = 3;
     public final int NUMBER_OF_MAPS = 2;
@@ -68,5 +70,30 @@ public class MapsFragment extends Fragment {
         b = null;
         textViews = null;
         progressBars = null;
+    }
+
+    @Override
+    public void resetCellText() {
+
+    }
+
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
+    }
+
+    @Override
+    public void hideProgress(int index) {
+
+    }
+
+    @Override
+    public void updateTime(int index, String resultTime) {
+
     }
 }

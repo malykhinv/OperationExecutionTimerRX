@@ -1,19 +1,32 @@
 package com.malykhinv.operationsexecutiontimerrx;
 
-public class IndexedData<Integer, T> {
-    public Integer index;
-    public T data;
+import java.util.List;
+import java.util.Map;
 
-    public IndexedData(Integer index, T data) {
+public class IndexedData {
+    public Integer index;
+    public List<Byte> collection;
+    public Map<Integer, Byte> map;
+
+    public IndexedData(Integer index, List<Byte> collection) {
         this.index = index;
-        this.data = data;
+        this.collection = collection;
+    }
+
+    public IndexedData(Integer index, Map<Integer, Byte> map) {
+        this.index = index;
+        this.map = map;
     }
 
     public Integer getIndex() {
         return index;
     }
 
-    public T getData() {
-        return data;
+    public List<Byte> getCollection() {
+        return collection;
+    }
+
+    public Map<Integer, Byte> getMap() {
+        return map;
     }
 }
