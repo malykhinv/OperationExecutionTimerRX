@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import com.malykhinv.operationsexecutiontimerrx.view.fragments.CollectionsFragment;
 import com.malykhinv.operationsexecutiontimerrx.view.fragments.MapsFragment;
+
 public class ViewPagerAdapter extends FragmentStateAdapter {
 
     private static final int TAB_COUNT = 2;

@@ -46,8 +46,8 @@ public class MainActivity extends FragmentActivity implements MainContract.View 
     }
 
     @Override
-    public void showError(String errorText) {
-        Toast.makeText(this, errorText, Toast.LENGTH_SHORT).show();
+    public void showError(String errorMessage) {
+        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
     }
 
     @Override

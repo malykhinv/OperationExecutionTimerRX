@@ -1,30 +1,24 @@
 package com.malykhinv.operationsexecutiontimerrx.view.fragments;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.fragment.app.Fragment;
-
 import com.malykhinv.operationsexecutiontimerrx.FragmentContract;
-import com.malykhinv.operationsexecutiontimerrx.MainContract;
+import com.malykhinv.operationsexecutiontimerrx.R;
 import com.malykhinv.operationsexecutiontimerrx.databinding.FragmentMapsBinding;
 import org.jetbrains.annotations.NotNull;
 
 public class MapsFragment extends Fragment implements FragmentContract.View {
 
-    public final int NUMBER_OF_OPERATIONS = 3;
-    public final int NUMBER_OF_MAPS = 2;
-    private static final String PREFERENCE_PREFIX = "M";        // Prefix for maps saved data ("M0"..."M11")
     private FragmentMapsBinding b;
     private View view = null;
     private Context context;
-    private SharedPreferences sharedPreferences;
     private TextView[] textViews;
     private ProgressBar[] progressBars;
 
@@ -33,7 +27,6 @@ public class MapsFragment extends Fragment implements FragmentContract.View {
         super.onCreate(savedInstanceState);
 
         context = getContext();
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     @Override
@@ -66,7 +59,6 @@ public class MapsFragment extends Fragment implements FragmentContract.View {
     public void onDestroyView() {
         super.onDestroyView();
         context = null;
-        sharedPreferences = null;
         b = null;
         textViews = null;
         progressBars = null;
@@ -74,26 +66,31 @@ public class MapsFragment extends Fragment implements FragmentContract.View {
 
     @Override
     public void resetCellText() {
-
+        for (TextView tv : textViews) tv.setText(context.getString(R.string.default_cell_text));
     }
 
     @Override
     public void showProgress() {
-
+        for (ProgressBar pb : progressBars) pb.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideProgress() {
-
+        for (ProgressBar pb : progressBars) pb.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void hideProgress(int index) {
-
+        progressBars[index].setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void updateTime(int index, String resultTime) {
+        textViews[index].setText(String.format("%s%s", resultTime, context.getString(R.string.postfix_time_unit)));
+    }
 
+    @Override
+    public void showError(String errorMessage) {
+        Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
     }
 }

@@ -13,7 +13,7 @@ public class MainPresenter implements MainContract.Presenter {
 
     public void onStartButtonWasClicked(FragmentContract.Presenter fragmentPresenter, String size) {
         if (fragmentPresenter != null) {
-            if (!size.isEmpty() && Integer.parseInt(size) > 0) fragmentPresenter.start(size);
+            if (!size.isEmpty() && Integer.parseInt(size) > 0) fragmentPresenter.onStartButtonWasClicked(size);
             else view.showError("R.string.error_wrong_size");
         }
     }
