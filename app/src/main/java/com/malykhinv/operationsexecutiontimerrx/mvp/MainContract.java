@@ -1,4 +1,4 @@
-package com.malykhinv.operationsexecutiontimerrx;
+package com.malykhinv.operationsexecutiontimerrx.mvp;
 
 public interface MainContract {
     interface View {

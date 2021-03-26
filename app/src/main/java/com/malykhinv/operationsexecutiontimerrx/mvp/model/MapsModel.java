@@ -1,9 +1,11 @@
-package com.malykhinv.operationsexecutiontimerrx.model.operators;
+package com.malykhinv.operationsexecutiontimerrx.mvp.model;
 
 import android.util.Log;
-import com.malykhinv.operationsexecutiontimerrx.FragmentContract;
+import com.malykhinv.operationsexecutiontimerrx.di.App;
+import com.malykhinv.operationsexecutiontimerrx.mvp.FragmentContract;
 import com.malykhinv.operationsexecutiontimerrx.IndexedData;
 import com.malykhinv.operationsexecutiontimerrx.OperationResult;
+import com.malykhinv.operationsexecutiontimerrx.storage.SharedPreferencesStorage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,9 +25,9 @@ public class MapsModel implements FragmentContract.Model {
     private static final String PREFERENCE_PREFIX = "M";                        // Prefix for SharedPreferences data ("M0"..."M5")
     private static final int NUMBER_OF_MAPS = 2;
     private static final int NUMBER_OF_OPERATIONS = 3;
-
     private final CompositeDisposable disposables = new CompositeDisposable();
     private FragmentContract.Model.Callback callback;
+    SharedPreferencesStorage sharedPreferencesStorage = App.getAppComponent().getSharedPreferencesStorage();
 
     public void registerCallback(Callback callback) {
         this.callback = callback;
@@ -67,7 +69,7 @@ public class MapsModel implements FragmentContract.Model {
         long timeStart = System.currentTimeMillis();
 
         if (map != null) {
-            switch (NUMBER_OF_OPERATIONS) {
+            switch (index % NUMBER_OF_OPERATIONS) {
                 case 0:
                     map.put(-1, (byte) 0);
                     break;
@@ -105,21 +107,47 @@ public class MapsModel implements FragmentContract.Model {
             @Override
             public void onNext(@NonNull OperationResult operationResult) {
                 Log.d(TAG, "onNext: " + Thread.currentThread().getName());
-                callback.onSingleCalculationComplete(operationResult.getIndex(), String.valueOf(operationResult.getExecutionTime()));
+                if (callback != null) callback.onSingleCalculationComplete(operationResult.getIndex(), String.valueOf(operationResult.getExecutionTime()));
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
                 Log.d(TAG, "onError: " + Thread.currentThread().getName());
-                callback.onError(e);
-                disposables.dispose();
+                if (callback != null) callback.onError(e);
+                this.onComplete();
             }
 
             @Override
             public void onComplete() {
                 Log.d(TAG, "onComplete: " + Thread.currentThread().getName());
+                callback = null;
+                sharedPreferencesStorage = null;
                 disposables.dispose();
             }
         });
+    }
+
+    @Override
+    public void writeResultTimeOnDisk(int index, String resultTime) {
+        sharedPreferencesStorage.write(PREFERENCE_PREFIX, index, resultTime);
+        callback.onSingleResultWasSavedOnDisk(index);
+    }
+
+    @Override
+    public String readResultTimeFromDisk(int index) {
+        if (sharedPreferencesStorage.contains(PREFERENCE_PREFIX + index))
+            return sharedPreferencesStorage.read(PREFERENCE_PREFIX, index);
+        else return null;
+    }
+
+    @Override
+    public ArrayList<String> readResultTimeFromDisk() {
+        ArrayList<String> listOfResultTime = new ArrayList<>();
+        for (int i = 0; i < NUMBER_OF_MAPS * NUMBER_OF_OPERATIONS; i++) {
+            if (sharedPreferencesStorage.contains(PREFERENCE_PREFIX + i))
+                listOfResultTime.add(sharedPreferencesStorage.read(PREFERENCE_PREFIX, i));
+            else listOfResultTime.add(null);
+        }
+        return listOfResultTime;
     }
 }

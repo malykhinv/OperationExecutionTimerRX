@@ -1,4 +1,4 @@
-package com.malykhinv.operationsexecutiontimerrx.view.fragments;
+package com.malykhinv.operationsexecutiontimerrx.mvp.view.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,24 +9,29 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.fragment.app.Fragment;
-import com.malykhinv.operationsexecutiontimerrx.FragmentContract;
+import com.malykhinv.operationsexecutiontimerrx.di.App;
+import com.malykhinv.operationsexecutiontimerrx.mvp.FragmentContract;
 import com.malykhinv.operationsexecutiontimerrx.R;
 import com.malykhinv.operationsexecutiontimerrx.databinding.FragmentCollectionsBinding;
+import com.malykhinv.operationsexecutiontimerrx.mvp.presenter.CollectionsPresenter;
 import org.jetbrains.annotations.NotNull;
+import java.util.ArrayList;
 
 public class CollectionsFragment extends Fragment implements FragmentContract.View {
 
-    private FragmentCollectionsBinding b;
+    private FragmentCollectionsBinding b = null;
     private View view = null;
     private Context context;
     private TextView[] textViews;
     private ProgressBar[] progressBars;
+    private FragmentContract.Presenter presenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        context = getContext();
+        context = App.getAppComponent().getContext();
+        presenter = new CollectionsPresenter(this);
     }
 
     @Override
@@ -53,6 +58,8 @@ public class CollectionsFragment extends Fragment implements FragmentContract.Vi
                 b.progressBarAddingInTheBeginningLinkedList, b.progressBarAddingInTheMiddleLinkedList, b.progressBarAddingInTheEndLinkedList, b.progressBarSearchByValueLinkedList, b.progressBarRemoveInTheBeginningLinkedList, b.progressBarRemoveInTheMiddleLinkedList, b.progressBarRemoveInTheEndLinkedList,
                 b.progressBarAddingInTheBeginningCopyOnWriteArrayList, b.progressBarAddingInTheMiddleCopyOnWriteArrayList, b.progressBarAddingInTheEndCopyOnWriteArrayList, b.progressBarSearchByValueCopyOnWriteArrayList, b.progressBarRemoveInTheBeginningCopyOnWriteArrayList, b.progressBarRemoveInTheMiddleCopyOnWriteArrayList, b.progressBarRemoveInTheEndCopyOnWriteArrayList
         };
+
+        presenter.onViewIsReady();
     }
 
     @Override
@@ -72,12 +79,21 @@ public class CollectionsFragment extends Fragment implements FragmentContract.Vi
 
     @Override
     public void hideProgress(int index) {
-        progressBars[index].setVisibility(View.INVISIBLE);
+        if (progressBars != null) progressBars[index].setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void updateTime(int index, String resultTime) {
-        textViews[index].setText(String.format("%s%s", resultTime, context.getString(R.string.postfix_time_unit)));
+        if (textViews != null) textViews[index].setText(String.format("%s%s", resultTime, context.getString(R.string.postfix_time_unit)));
+    }
+
+    @Override
+    public void updateTime(ArrayList<String> listOfResultTime) {
+        if (textViews.length == listOfResultTime.size()) {
+            for (int i = 0; i < textViews.length; i++)
+                if (listOfResultTime.get(i) != null) textViews[i].setText(String.format("%s%s", listOfResultTime.get(i), context.getString(R.string.postfix_time_unit)));
+                else textViews[i].setText(context.getString(R.string.default_cell_text));
+        }
     }
 
     @Override

@@ -3,6 +3,9 @@
     package="com.malykhinv.operationsexecutiontimerrx">
 
     <application
+        android:name="com.malykhinv.operationsexecutiontimerrx.di.App"
+        android:configChanges="orientation|screenSize"
+        android:largeHeap="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -10,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OperationsExecutionTimerRX"
         android:fullBackupContent="@xml/backup_descriptor">
-        <activity android:name=".view.MainActivity">
+        <activity android:name=".mvp.view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

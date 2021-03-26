@@ -1,18 +1,18 @@
-package com.malykhinv.operationsexecutiontimerrx.view;
+package com.malykhinv.operationsexecutiontimerrx.mvp.view;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 import androidx.fragment.app.FragmentActivity;
 import com.google.android.material.tabs.TabLayoutMediator;
-import com.malykhinv.operationsexecutiontimerrx.FragmentContract;
-import com.malykhinv.operationsexecutiontimerrx.MainContract;
+import com.malykhinv.operationsexecutiontimerrx.mvp.FragmentContract;
+import com.malykhinv.operationsexecutiontimerrx.mvp.MainContract;
 import com.malykhinv.operationsexecutiontimerrx.databinding.ActivityMainBinding;
-import com.malykhinv.operationsexecutiontimerrx.presenter.CollectionsPresenter;
-import com.malykhinv.operationsexecutiontimerrx.presenter.MainPresenter;
-import com.malykhinv.operationsexecutiontimerrx.presenter.MapsPresenter;
-import com.malykhinv.operationsexecutiontimerrx.view.fragments.CollectionsFragment;
-import com.malykhinv.operationsexecutiontimerrx.view.fragments.MapsFragment;
+import com.malykhinv.operationsexecutiontimerrx.mvp.presenter.CollectionsPresenter;
+import com.malykhinv.operationsexecutiontimerrx.mvp.presenter.MainPresenter;
+import com.malykhinv.operationsexecutiontimerrx.mvp.presenter.MapsPresenter;
+import com.malykhinv.operationsexecutiontimerrx.mvp.view.fragments.CollectionsFragment;
+import com.malykhinv.operationsexecutiontimerrx.mvp.view.fragments.MapsFragment;
 
 public class MainActivity extends FragmentActivity implements MainContract.View {
 
@@ -24,16 +24,15 @@ public class MainActivity extends FragmentActivity implements MainContract.View 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        bind();
+        initializeViewPager();
+        presenter = new MainPresenter(this);
+    }
+
+    public void bind() {
         b = ActivityMainBinding.inflate(getLayoutInflater());
         View view = b.getRoot();
         setContentView(view);
-
-        if (pagerAdapter == null) pagerAdapter = new ViewPagerAdapter(this);
-        b.pager.setAdapter(pagerAdapter);
-        new TabLayoutMediator(b.tabLayout, b.pager,
-                (tab, position) -> tab.setText(tabTitles[position])).attach();
-
-        presenter = new MainPresenter(this);
 
         b.fabCalculate.setOnClickListener(v -> {
             String size = String.valueOf(b.textInputNumberOfElements.getText());
@@ -43,6 +42,13 @@ public class MainActivity extends FragmentActivity implements MainContract.View 
                 else if (currentFragment instanceof MapsFragment) presenter.onStartButtonWasClicked(new MapsPresenter(currentFragment), size);
             }
         });
+    }
+
+    public void initializeViewPager() {
+        if (pagerAdapter == null) pagerAdapter = new ViewPagerAdapter(this);
+        b.pager.setAdapter(pagerAdapter);
+        new TabLayoutMediator(b.tabLayout, b.pager,
+                (tab, position) -> tab.setText(tabTitles[position])).attach();
     }
 
     @Override

@@ -1,7 +1,9 @@
-package com.malykhinv.operationsexecutiontimerrx.presenter;
+package com.malykhinv.operationsexecutiontimerrx.mvp.presenter;
 
-import com.malykhinv.operationsexecutiontimerrx.FragmentContract;
-import com.malykhinv.operationsexecutiontimerrx.MainContract;
+import com.malykhinv.operationsexecutiontimerrx.R;
+import com.malykhinv.operationsexecutiontimerrx.di.App;
+import com.malykhinv.operationsexecutiontimerrx.mvp.FragmentContract;
+import com.malykhinv.operationsexecutiontimerrx.mvp.MainContract;
 
 public class MainPresenter implements MainContract.Presenter {
 
@@ -14,7 +16,7 @@ public class MainPresenter implements MainContract.Presenter {
     public void onStartButtonWasClicked(FragmentContract.Presenter fragmentPresenter, String size) {
         if (fragmentPresenter != null) {
             if (!size.isEmpty() && Integer.parseInt(size) > 0) fragmentPresenter.onStartButtonWasClicked(size);
-            else view.showError("R.string.error_wrong_size");
+            else view.showError(App.getAppComponent().getContext().getString(R.string.error_wrong_size));
         }
     }
 

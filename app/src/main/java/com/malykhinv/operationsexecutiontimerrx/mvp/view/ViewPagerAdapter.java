@@ -1,11 +1,11 @@
-package com.malykhinv.operationsexecutiontimerrx.view;
+package com.malykhinv.operationsexecutiontimerrx.mvp.view;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
-import com.malykhinv.operationsexecutiontimerrx.view.fragments.CollectionsFragment;
-import com.malykhinv.operationsexecutiontimerrx.view.fragments.MapsFragment;
+import com.malykhinv.operationsexecutiontimerrx.mvp.view.fragments.CollectionsFragment;
+import com.malykhinv.operationsexecutiontimerrx.mvp.view.fragments.MapsFragment;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
 
