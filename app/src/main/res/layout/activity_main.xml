@@ -13,13 +13,11 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/TabItem"
             android:text="@string/tab_title_collections" />
 
         <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/TabItem"
             android:text="@string/tab_title_maps" />
 
     </com.google.android.material.tabs.TabLayout>

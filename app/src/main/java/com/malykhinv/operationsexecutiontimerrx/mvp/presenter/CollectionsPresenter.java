@@ -19,14 +19,14 @@ public class CollectionsPresenter implements FragmentContract.Presenter, Collect
 
     @Override
     public void onViewIsReady() {
+        view.resetCellText();
         ArrayList<String> listOfResultTime = model.readResultTimeFromDisk();
-        view.updateTime(listOfResultTime);
+        if (listOfResultTime != null) view.updateTime(listOfResultTime);
     }
 
     @Override
     public void onStartButtonWasClicked(String size) {
         view.showProgress();
-        view.resetCellText();
         model.registerCallback(this);
         model.execute(size);
     }
