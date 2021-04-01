@@ -2,9 +2,11 @@ package com.malykhinv.operationsexecutiontimerrx.mvp.view;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 import androidx.fragment.app.FragmentActivity;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.malykhinv.operationsexecutiontimerrx.di.App;
 import com.malykhinv.operationsexecutiontimerrx.mvp.FragmentContract;
 import com.malykhinv.operationsexecutiontimerrx.mvp.MainContract;
 import com.malykhinv.operationsexecutiontimerrx.databinding.ActivityMainBinding;
@@ -35,6 +37,7 @@ public class MainActivity extends FragmentActivity implements MainContract.View 
         setContentView(view);
 
         b.fabCalculate.setOnClickListener(v -> {
+            hideKeyboard();
             String size = String.valueOf(b.textInputNumberOfElements.getText());
             FragmentContract.View currentFragment = (FragmentContract.View) getSupportFragmentManager().findFragmentByTag("f" + b.pager.getCurrentItem());
             if (currentFragment != null) {
@@ -49,6 +52,12 @@ public class MainActivity extends FragmentActivity implements MainContract.View 
         b.pager.setAdapter(pagerAdapter);
         new TabLayoutMediator(b.tabLayout, b.pager,
                 (tab, position) -> tab.setText(tabTitles[position])).attach();
+    }
+
+    public void hideKeyboard() {
+        App.getAppComponent().getContext();
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        if (this.getCurrentFocus() != null) inputMethodManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), 0);
     }
 
     @Override

@@ -19,8 +19,8 @@ import java.util.ArrayList;
 
 public class MapsFragment extends Fragment implements FragmentContract.View {
 
-    private FragmentMapsBinding b = null;
-    private View view = null;
+    private FragmentMapsBinding b;
+    private View view;
     private Context context;
     private TextView[] textViews;
     private ProgressBar[] progressBars;
@@ -62,14 +62,6 @@ public class MapsFragment extends Fragment implements FragmentContract.View {
         presenter.onViewIsReady();
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        context = null;
-        b = null;
-        textViews = null;
-        progressBars = null;
-    }
 
     @Override
     public void resetCellText() {
@@ -82,23 +74,18 @@ public class MapsFragment extends Fragment implements FragmentContract.View {
     }
 
     @Override
-    public void hideProgress() {
-        for (ProgressBar pb : progressBars) pb.setVisibility(View.INVISIBLE);
-    }
-
-    @Override
     public void hideProgress(int index) {
         if (progressBars != null) progressBars[index].setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void updateTime(int index, String resultTime) {
-        textViews[index].setText(String.format("%s%s", resultTime, context.getString(R.string.postfix_time_unit)));
+        if (textViews != null) textViews[index].setText(String.format("%s%s", resultTime, context.getString(R.string.postfix_time_unit)));
     }
 
     @Override
     public void updateTime(ArrayList<String> listOfResultTime) {
-        if (textViews.length == listOfResultTime.size()) {
+        if (listOfResultTime != null && textViews.length == listOfResultTime.size()) {
             for (int i = 0; i < textViews.length; i++)
                 if (listOfResultTime.get(i) != null) textViews[i].setText(String.format("%s%s", listOfResultTime.get(i), context.getString(R.string.postfix_time_unit)));
                 else textViews[i].setText(context.getString(R.string.default_cell_text));
@@ -108,5 +95,14 @@ public class MapsFragment extends Fragment implements FragmentContract.View {
     @Override
     public void showError(String errorMessage) {
         Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        context = null;
+        b = null;
+        textViews = null;
+        progressBars = null;
     }
 }

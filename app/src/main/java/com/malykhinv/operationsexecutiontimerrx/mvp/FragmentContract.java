@@ -10,7 +10,6 @@ public interface FragmentContract {
     interface View {
         void resetCellText();
         void showProgress();
-        void hideProgress();
         void hideProgress(int index);
         void updateTime(int index, String resultTime);
         void updateTime(ArrayList<String> listOfResultTime);

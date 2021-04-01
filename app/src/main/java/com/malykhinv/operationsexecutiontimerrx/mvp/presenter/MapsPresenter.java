@@ -19,13 +19,13 @@ public class MapsPresenter implements FragmentContract.Presenter, FragmentContra
 
     @Override
     public void onViewIsReady() {
-        view.resetCellText();
         ArrayList<String> listOfResultTime = model.readResultTimeFromDisk();
         if (listOfResultTime != null) view.updateTime(listOfResultTime);
     }
 
     @Override
     public void onStartButtonWasClicked(String size) {
+        view.resetCellText();
         view.showProgress();
         model.registerCallback(this);
         model.execute(size);
@@ -41,17 +41,15 @@ public class MapsPresenter implements FragmentContract.Presenter, FragmentContra
 
     @Override
     public void onSingleResultWasSavedOnDisk(int index) {
+        view.hideProgress(index);
         String time = model.readResultTimeFromDisk(index);
         if (time != null) {
             view.updateTime(index, time);
-            view.hideProgress(index);
         }
     }
 
     @Override
     public void onError(Throwable e) {
-        view.hideProgress();
-        view.resetCellText();
         view.showError(e.getMessage());
     }
 }

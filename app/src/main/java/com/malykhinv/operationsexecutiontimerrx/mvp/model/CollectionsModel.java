@@ -11,6 +11,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
@@ -131,14 +133,11 @@ public class CollectionsModel implements FragmentContract.Model {
             public void onError(@NonNull Throwable e) {
                 Log.d(TAG, "onError: " + Thread.currentThread().getName());
                 if (callback != null) callback.onError(e);
-                this.onComplete();
             }
 
             @Override
             public void onComplete() {
                 Log.d(TAG, "onComplete: " + Thread.currentThread().getName());
-                callback = null;
-                sharedPreferencesStorage = null;
                 disposables.dispose();
             }
         });
@@ -146,8 +145,16 @@ public class CollectionsModel implements FragmentContract.Model {
 
     @Override
     public void writeResultTimeOnDisk(int index, String resultTime) {
-        sharedPreferencesStorage.write(PREFERENCE_PREFIX, index, resultTime);
-        callback.onSingleResultWasSavedOnDisk(index);
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.execute(() -> {
+            try {
+                sharedPreferencesStorage.write(PREFERENCE_PREFIX, index, resultTime);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (callback != null) callback.onSingleResultWasSavedOnDisk(index);
+            }
+        });
     }
 
     @Override

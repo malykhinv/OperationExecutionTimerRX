@@ -19,8 +19,8 @@ import java.util.ArrayList;
 
 public class CollectionsFragment extends Fragment implements FragmentContract.View {
 
-    private FragmentCollectionsBinding b = null;
-    private View view = null;
+    private FragmentCollectionsBinding b;
+    private View view;
     private Context context;
     private TextView[] textViews;
     private ProgressBar[] progressBars;
@@ -73,11 +73,6 @@ public class CollectionsFragment extends Fragment implements FragmentContract.Vi
     }
 
     @Override
-    public void hideProgress() {
-        for (ProgressBar pb : progressBars) pb.setVisibility(View.INVISIBLE);
-    }
-
-    @Override
     public void hideProgress(int index) {
         if (progressBars != null) progressBars[index].setVisibility(View.INVISIBLE);
     }
@@ -89,7 +84,7 @@ public class CollectionsFragment extends Fragment implements FragmentContract.Vi
 
     @Override
     public void updateTime(ArrayList<String> listOfResultTime) {
-        if (textViews.length == listOfResultTime.size()) {
+        if (listOfResultTime != null && textViews.length == listOfResultTime.size()) {
             for (int i = 0; i < textViews.length; i++)
                 if (listOfResultTime.get(i) != null) textViews[i].setText(String.format("%s%s", listOfResultTime.get(i), context.getString(R.string.postfix_time_unit)));
                 else textViews[i].setText(context.getString(R.string.default_cell_text));
