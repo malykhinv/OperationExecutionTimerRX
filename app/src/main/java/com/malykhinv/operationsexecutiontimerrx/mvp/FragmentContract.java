@@ -8,6 +8,7 @@ import java.util.List;
 public interface FragmentContract {
 
     interface View {
+        void onStartButtonWasClicked(String size);
         void resetCellText();
         void showProgress();
         void hideProgress(int index);

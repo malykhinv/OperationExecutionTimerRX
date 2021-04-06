@@ -10,11 +10,7 @@ import com.malykhinv.operationsexecutiontimerrx.di.App;
 import com.malykhinv.operationsexecutiontimerrx.mvp.FragmentContract;
 import com.malykhinv.operationsexecutiontimerrx.mvp.MainContract;
 import com.malykhinv.operationsexecutiontimerrx.databinding.ActivityMainBinding;
-import com.malykhinv.operationsexecutiontimerrx.mvp.presenter.CollectionsPresenter;
 import com.malykhinv.operationsexecutiontimerrx.mvp.presenter.MainPresenter;
-import com.malykhinv.operationsexecutiontimerrx.mvp.presenter.MapsPresenter;
-import com.malykhinv.operationsexecutiontimerrx.mvp.view.fragments.CollectionsFragment;
-import com.malykhinv.operationsexecutiontimerrx.mvp.view.fragments.MapsFragment;
 
 public class MainActivity extends FragmentActivity implements MainContract.View {
 
@@ -40,10 +36,7 @@ public class MainActivity extends FragmentActivity implements MainContract.View 
             hideKeyboard();
             String size = String.valueOf(b.textInputNumberOfElements.getText());
             FragmentContract.View currentFragment = (FragmentContract.View) getSupportFragmentManager().findFragmentByTag("f" + b.pager.getCurrentItem());
-            if (currentFragment != null) {
-                if (currentFragment instanceof CollectionsFragment) presenter.onStartButtonWasClicked(new CollectionsPresenter(currentFragment), size);
-                else if (currentFragment instanceof MapsFragment) presenter.onStartButtonWasClicked(new MapsPresenter(currentFragment), size);
-            }
+            if (currentFragment != null) presenter.onStartButtonWasClicked(currentFragment, size);
         });
     }
 

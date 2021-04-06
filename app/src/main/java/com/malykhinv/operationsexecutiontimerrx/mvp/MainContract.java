@@ -6,7 +6,7 @@ public interface MainContract {
     }
 
     interface Presenter {
-        void onStartButtonWasClicked(FragmentContract.Presenter fragmentPresenter, String size);
+        void onStartButtonWasClicked(FragmentContract.View fragmentView, String size);
         void detachView();
     }
 }

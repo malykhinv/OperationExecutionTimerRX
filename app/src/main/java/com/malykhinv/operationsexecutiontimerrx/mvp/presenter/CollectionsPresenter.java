@@ -41,10 +41,10 @@ public class CollectionsPresenter implements FragmentContract.Presenter, Collect
 
     @Override
     public void onSingleResultWasSavedOnDisk(int index) {
-        view.hideProgress(index);
         String time = model.readResultTimeFromDisk(index);
         if (time != null) {
             view.updateTime(index, time);
+            view.hideProgress(index);
         }
     }
 

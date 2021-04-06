@@ -41,9 +41,9 @@ public class MapsPresenter implements FragmentContract.Presenter, FragmentContra
 
     @Override
     public void onSingleResultWasSavedOnDisk(int index) {
-        view.hideProgress(index);
         String time = model.readResultTimeFromDisk(index);
         if (time != null) {
+            view.hideProgress(index);
             view.updateTime(index, time);
         }
     }

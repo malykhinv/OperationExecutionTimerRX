@@ -31,7 +31,6 @@ public class MapsFragment extends Fragment implements FragmentContract.View {
         super.onCreate(savedInstanceState);
 
         context = App.getAppComponent().getContext();
-        presenter = new MapsPresenter(this);
     }
 
     @Override
@@ -59,9 +58,14 @@ public class MapsFragment extends Fragment implements FragmentContract.View {
                 b.progressBarRemovingTreeMap, b.progressBarRemovingHashMap
         };
 
-        presenter.onViewIsReady();
+        presenter = new MapsPresenter(this);
+        if (presenter != null) presenter.onViewIsReady();
     }
 
+    @Override
+    public void onStartButtonWasClicked(String size) {
+        presenter.onStartButtonWasClicked(size);
+    }
 
     @Override
     public void resetCellText() {

@@ -138,6 +138,7 @@ public class MapsModel implements FragmentContract.Model {
                 if (callback != null) callback.onSingleResultWasSavedOnDisk(index);
             }
         });
+        executorService.shutdown();
     }
 
     @Override

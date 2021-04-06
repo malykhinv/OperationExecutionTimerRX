@@ -2,7 +2,6 @@ package com.malykhinv.operationsexecutiontimerrx.di;
 
 import android.app.Application;
 import android.content.Context;
-
 import com.malykhinv.operationsexecutiontimerrx.storage.SharedPreferencesStorage;
 import javax.inject.Singleton;
 import dagger.Module;

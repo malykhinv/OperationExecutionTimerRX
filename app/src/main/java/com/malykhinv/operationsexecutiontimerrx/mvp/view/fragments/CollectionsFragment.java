@@ -31,7 +31,6 @@ public class CollectionsFragment extends Fragment implements FragmentContract.Vi
         super.onCreate(savedInstanceState);
 
         context = App.getAppComponent().getContext();
-        presenter = new CollectionsPresenter(this);
     }
 
     @Override
@@ -59,7 +58,13 @@ public class CollectionsFragment extends Fragment implements FragmentContract.Vi
                 b.progressBarAddingInTheBeginningCopyOnWriteArrayList, b.progressBarAddingInTheMiddleCopyOnWriteArrayList, b.progressBarAddingInTheEndCopyOnWriteArrayList, b.progressBarSearchByValueCopyOnWriteArrayList, b.progressBarRemoveInTheBeginningCopyOnWriteArrayList, b.progressBarRemoveInTheMiddleCopyOnWriteArrayList, b.progressBarRemoveInTheEndCopyOnWriteArrayList
         };
 
-        presenter.onViewIsReady();
+        presenter = new CollectionsPresenter(this);
+        if (presenter != null) presenter.onViewIsReady();
+    }
+
+    @Override
+    public void onStartButtonWasClicked(String size) {
+        presenter.onStartButtonWasClicked(size);
     }
 
     @Override
@@ -96,6 +101,7 @@ public class CollectionsFragment extends Fragment implements FragmentContract.Vi
         Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         context = null;
