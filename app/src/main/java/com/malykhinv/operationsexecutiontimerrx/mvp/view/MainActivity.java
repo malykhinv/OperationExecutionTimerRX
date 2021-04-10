@@ -62,5 +62,6 @@ public class MainActivity extends FragmentActivity implements MainContract.View 
     public void onDestroy() {
         super.onDestroy();
         presenter.detachView();
+        presenter = null;
     }
 }

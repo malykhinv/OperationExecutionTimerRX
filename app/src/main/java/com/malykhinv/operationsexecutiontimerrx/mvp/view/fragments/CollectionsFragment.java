@@ -58,8 +58,8 @@ public class CollectionsFragment extends Fragment implements FragmentContract.Vi
                 b.progressBarAddingInTheBeginningCopyOnWriteArrayList, b.progressBarAddingInTheMiddleCopyOnWriteArrayList, b.progressBarAddingInTheEndCopyOnWriteArrayList, b.progressBarSearchByValueCopyOnWriteArrayList, b.progressBarRemoveInTheBeginningCopyOnWriteArrayList, b.progressBarRemoveInTheMiddleCopyOnWriteArrayList, b.progressBarRemoveInTheEndCopyOnWriteArrayList
         };
 
-        presenter = new CollectionsPresenter(this);
-        if (presenter != null) presenter.onViewIsReady();
+        if (presenter == null) presenter = new CollectionsPresenter(this);
+        presenter.onViewIsReady();
     }
 
     @Override
@@ -92,7 +92,10 @@ public class CollectionsFragment extends Fragment implements FragmentContract.Vi
         if (listOfResultTime != null && textViews.length == listOfResultTime.size()) {
             for (int i = 0; i < textViews.length; i++)
                 if (listOfResultTime.get(i) != null) textViews[i].setText(String.format("%s%s", listOfResultTime.get(i), context.getString(R.string.postfix_time_unit)));
-                else textViews[i].setText(context.getString(R.string.default_cell_text));
+                else {
+                    textViews[i].setText(context.getString(R.string.default_cell_text));
+                    progressBars[i].setVisibility(View.VISIBLE);
+                }
         }
     }
 

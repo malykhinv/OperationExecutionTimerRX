@@ -10,9 +10,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
@@ -27,7 +26,6 @@ public class MapsModel implements FragmentContract.Model {
     private static final String PREFERENCE_PREFIX = "M";                        // Prefix for SharedPreferences data ("M0"..."M5")
     private static final int NUMBER_OF_MAPS = 2;
     private static final int NUMBER_OF_OPERATIONS = 3;
-    private final CompositeDisposable disposables = new CompositeDisposable();
     private FragmentContract.Model.Callback callback;
     SharedPreferencesStorage sharedPreferencesStorage = App.getAppComponent().getSharedPreferencesStorage();
 
@@ -89,6 +87,8 @@ public class MapsModel implements FragmentContract.Model {
 
     @Override
     public void execute(String size) {
+        CompositeDisposable disposables = new CompositeDisposable();
+
         @NonNull Observable<OperationResult> observable = Observable
                 .fromIterable(getIndexedData())
                 .flatMap(indexedData -> Observable
@@ -128,22 +128,13 @@ public class MapsModel implements FragmentContract.Model {
 
     @Override
     public void writeResultTimeOnDisk(int index, String resultTime) {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.execute(() -> {
-            try {
-                sharedPreferencesStorage.write(PREFERENCE_PREFIX, index, resultTime);
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                if (callback != null) callback.onSingleResultWasSavedOnDisk(index);
-            }
-        });
-        executorService.shutdown();
+        sharedPreferencesStorage.write(PREFERENCE_PREFIX, index, resultTime);
+        if (callback != null) callback.onSingleResultWasSavedOnDisk(index);
     }
 
     @Override
     public String readResultTimeFromDisk(int index) {
-        if (sharedPreferencesStorage.contains(PREFERENCE_PREFIX + index))
+        if (sharedPreferencesStorage.contains(PREFERENCE_PREFIX, PREFERENCE_PREFIX + index))
             return sharedPreferencesStorage.read(PREFERENCE_PREFIX, index);
         else return null;
     }
@@ -152,10 +143,17 @@ public class MapsModel implements FragmentContract.Model {
     public ArrayList<String> readResultTimeFromDisk() {
         ArrayList<String> listOfResultTime = new ArrayList<>();
         for (int i = 0; i < NUMBER_OF_MAPS * NUMBER_OF_OPERATIONS; i++) {
-            if (sharedPreferencesStorage.contains(PREFERENCE_PREFIX + i))
+            if (sharedPreferencesStorage.contains(PREFERENCE_PREFIX, PREFERENCE_PREFIX + i))
                 listOfResultTime.add(sharedPreferencesStorage.read(PREFERENCE_PREFIX, i));
             else listOfResultTime.add(null);
         }
+
+        if (listOfResultTime.stream().allMatch(Objects::isNull)) listOfResultTime = null;
         return listOfResultTime;
+    }
+
+    @Override
+    public void clearSavedData() {
+        sharedPreferencesStorage.clear(PREFERENCE_PREFIX);
     }
 }

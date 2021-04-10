@@ -24,4 +24,5 @@
     <string name="default_cell_text">N/A</string>
     <string name="postfix_time_unit">" ms"</string>
     <string name="default_size">2000000</string>
+    <string name="low_line">_</string>
 </resources>

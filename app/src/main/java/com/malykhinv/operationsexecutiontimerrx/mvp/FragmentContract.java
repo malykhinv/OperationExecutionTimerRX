@@ -27,6 +27,7 @@ public interface FragmentContract {
         IndexedData fillIndexedData(IndexedData data, int size);
         OperationResult operateWithIndexedData(IndexedData data);
         void registerCallback(FragmentContract.Model.Callback callback);
+        void clearSavedData();
         void execute(String size);
         void writeResultTimeOnDisk(int index, String resultTime);
         String readResultTimeFromDisk(int index);

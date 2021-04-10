@@ -2,6 +2,7 @@ package com.malykhinv.operationsexecutiontimerrx.mvp.view.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,8 +59,8 @@ public class MapsFragment extends Fragment implements FragmentContract.View {
                 b.progressBarRemovingTreeMap, b.progressBarRemovingHashMap
         };
 
-        presenter = new MapsPresenter(this);
-        if (presenter != null) presenter.onViewIsReady();
+        if (presenter == null) presenter = new MapsPresenter(this);
+        presenter.onViewIsReady();
     }
 
     @Override
@@ -92,7 +93,10 @@ public class MapsFragment extends Fragment implements FragmentContract.View {
         if (listOfResultTime != null && textViews.length == listOfResultTime.size()) {
             for (int i = 0; i < textViews.length; i++)
                 if (listOfResultTime.get(i) != null) textViews[i].setText(String.format("%s%s", listOfResultTime.get(i), context.getString(R.string.postfix_time_unit)));
-                else textViews[i].setText(context.getString(R.string.default_cell_text));
+                else {
+                    textViews[i].setText(context.getString(R.string.default_cell_text));
+                    progressBars[i].setVisibility(View.VISIBLE);
+                }
         }
     }
 

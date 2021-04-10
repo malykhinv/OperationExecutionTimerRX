@@ -1,17 +1,19 @@
 package com.malykhinv.operationsexecutiontimerrx.mvp.presenter;
 
+import com.malykhinv.operationsexecutiontimerrx.di.App;
 import com.malykhinv.operationsexecutiontimerrx.mvp.FragmentContract;
 import com.malykhinv.operationsexecutiontimerrx.mvp.model.MapsModel;
 import java.util.ArrayList;
 
-public class MapsPresenter implements FragmentContract.Presenter, FragmentContract.Model.Callback {
+public class MapsPresenter implements FragmentContract.Presenter, MapsModel.Callback {
 
     private final FragmentContract.View view;
-    private final FragmentContract.Model model;
+    private FragmentContract.Model model;
 
     public MapsPresenter(FragmentContract.View view) {
         this.view = view;
-        this.model = new MapsModel();
+        if (model == null) model = App.getAppComponent().getMapsModel();
+        model.registerCallback(this);
     }
 
 
@@ -27,7 +29,7 @@ public class MapsPresenter implements FragmentContract.Presenter, FragmentContra
     public void onStartButtonWasClicked(String size) {
         view.resetCellText();
         view.showProgress();
-        model.registerCallback(this);
+        model.clearSavedData();
         model.execute(size);
     }
 

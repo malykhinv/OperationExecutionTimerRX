@@ -1,5 +1,6 @@
 package com.malykhinv.operationsexecutiontimerrx.mvp.presenter;
 
+import com.malykhinv.operationsexecutiontimerrx.di.App;
 import com.malykhinv.operationsexecutiontimerrx.mvp.FragmentContract;
 import com.malykhinv.operationsexecutiontimerrx.mvp.model.CollectionsModel;
 import java.util.ArrayList;
@@ -7,11 +8,12 @@ import java.util.ArrayList;
 public class CollectionsPresenter implements FragmentContract.Presenter, CollectionsModel.Callback {
 
     private final FragmentContract.View view;
-    private final FragmentContract.Model model;
+    private FragmentContract.Model model;
 
     public CollectionsPresenter(FragmentContract.View view) {
         this.view = view;
-        this.model = new CollectionsModel();
+        if (model == null) model = App.getAppComponent().getCollectionsModel();
+        model.registerCallback(this);
     }
 
 
@@ -27,7 +29,7 @@ public class CollectionsPresenter implements FragmentContract.Presenter, Collect
     public void onStartButtonWasClicked(String size) {
         view.resetCellText();
         view.showProgress();
-        model.registerCallback(this);
+        model.clearSavedData();
         model.execute(size);
     }
 
@@ -43,8 +45,8 @@ public class CollectionsPresenter implements FragmentContract.Presenter, Collect
     public void onSingleResultWasSavedOnDisk(int index) {
         String time = model.readResultTimeFromDisk(index);
         if (time != null) {
-            view.updateTime(index, time);
             view.hideProgress(index);
+            view.updateTime(index, time);
         }
     }
 
